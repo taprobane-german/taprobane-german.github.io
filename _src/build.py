@@ -217,7 +217,7 @@ def footer():
     return f'''<footer class="site-footer"><div class="wrap"><div class="cols">
 <div>{brand("by " + PUB)}<p>Clear, structured self-study German for English speakers — from your first word to B2, and the German you need on the ward.</p>
 <p><a class="ig" href="{INSTAGRAM}" target="_blank" rel="noopener">Follow @deutschvonzero on Instagram</a> or <a class="ig" href="{FACEBOOK}" target="_blank" rel="noopener">Facebook</a> — a free German tip every few days.</p>
-<p>Questions or corrections? <a class="inline" href="contact.html">Get in touch →</a></p></div>
+<p>Questions? <a class="inline" href="contact.html">Get in touch →</a></p></div>
 <div><h2 class="fh">German from Zero</h2>{zero}</div>
 <div><h2 class="fh">German for Nurses</h2>{pfl}</div>
 <div><h2 class="fh">Help</h2><a href="level-test.html">Find your level</a><a href="bonus.html">Free resources</a><a href="./#faq">FAQ</a><a href="about.html">About the publisher</a><a href="contact.html">Contact</a><a href="legal.html">Legal &amp; privacy</a></div>
@@ -233,7 +233,7 @@ def inquiry():
     return f'''<div class="cpanel form-panel"><span class="eyebrow dark">Inquiry</span><h2>Send an inquiry</h2>
 <form id="inquiry" action="{esc(FORM_ENDPOINT)}" method="POST" novalidate>{hidden}
 <input type="hidden" name="subject" value="German from Zero – website inquiry">
-<label>Topic<select name="topic" required><option value="">Choose…</option><option>Question about a book</option><option>I found a mistake</option><option>Which level is right for me?</option><option>Teacher / school / bulk order</option><option>Something else</option></select></label>
+<label>Topic<select name="topic" required><option value="">Choose…</option><option>Question about a book</option><option>Feedback on a book</option><option>Which level is right for me?</option><option>Teacher / school / bulk order</option><option>Something else</option></select></label>
 <label>Your name <span class="opt">(optional)</span><input name="name" autocomplete="name" maxlength="80"></label>
 <label>Your e-mail <span class="opt">(so we can reply)</span><input name="email" type="email" autocomplete="email" required maxlength="120"></label>
 <label>Message<textarea name="message" rows="5" required maxlength="3000"></textarea></label>
