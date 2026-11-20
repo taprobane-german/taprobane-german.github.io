@@ -21,7 +21,7 @@ import datetime, html, json, pathlib, re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "_src"
-BASE = "https://kavindukahanda.github.io/taprobane-german/"
+BASE = "https://taprobane-german.github.io/"
 # Inquiry form: paste the free form service's endpoint URL here (e.g. Formspree / Web3Forms).
 # While it is empty the contact page shows only the Instagram panel, no broken form.
 FORM_ENDPOINT = "https://api.web3forms.com/submit"

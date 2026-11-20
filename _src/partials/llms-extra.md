@@ -1,6 +1,6 @@
 ## Free tools
-- [German level test](https://kavindukahanda.github.io/taprobane-german/level-test.html): 12-question A1–B2 placement test with book recommendation.
-- [Free phrase cards](https://kavindukahanda.github.io/taprobane-german/bonus.html): printable German–English ward phrases for nurses and A1 survival phrases.
+- [German level test](https://taprobane-german.github.io/level-test.html): 12-question A1–B2 placement test with book recommendation.
+- [Free phrase cards](https://taprobane-german.github.io/bonus.html): printable German–English ward phrases for nurses and A1 survival phrases.
 
 ## FAQ
 - Which book should I start with? If you know no German, start with A1. If you can already introduce yourself and handle simple everyday situations, try A2. Each book ends with a final review and mock exam, so you can check whether you are ready for the next level.

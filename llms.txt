@@ -6,21 +6,21 @@
 
 > A four-book self-study German course for English speakers, from A1 (complete beginner) to B2 (upper intermediate).
 
-- [Deutsch A1: German from Zero](https://kavindukahanda.github.io/taprobane-german/a1.html): Start German from zero: greetings, numbers, family, time, daily routine, shopping, food, the city and the doctor — explained in plain English. Amazon: https://www.amazon.com/dp/B0HMPNDN8H (paperback), https://www.amazon.com/dp/B0HMPWHZR4 (Kindle)
-- [Deutsch A2: German from Zero](https://kavindukahanda.github.io/taprobane-german/a2.html): Talk about what you did, where you live, your health, work and plans — and get ready for an A2 exam. Amazon: https://www.amazon.com/dp/B0HMS3HQVG (paperback), https://www.amazon.com/dp/B0HMS37QX6 (Kindle)
-- [Deutsch B1: German from Zero](https://kavindukahanda.github.io/taprobane-german/b1.html): Move beyond everyday German: speak, argue and write with confidence at B1. 276 pages. Amazon: https://www.amazon.com/dp/B0HMVK97G6 (paperback), https://www.amazon.com/dp/B0HMVZ28R4 (Kindle)
-- [Deutsch B2: German from Zero](https://kavindukahanda.github.io/taprobane-german/b2.html): Reach B2: argue, report and write at university and workplace level, with over 600 new words and example sentences. 350 pages. Amazon: https://www.amazon.com/dp/B0HMYH31LN (paperback), https://www.amazon.com/dp/B0HKZPM3NJ (Kindle)
+- [Deutsch A1: German from Zero](https://taprobane-german.github.io/a1.html): Start German from zero: greetings, numbers, family, time, daily routine, shopping, food, the city and the doctor — explained in plain English. Amazon: https://www.amazon.com/dp/B0HMPNDN8H (paperback), https://www.amazon.com/dp/B0HMPWHZR4 (Kindle)
+- [Deutsch A2: German from Zero](https://taprobane-german.github.io/a2.html): Talk about what you did, where you live, your health, work and plans — and get ready for an A2 exam. Amazon: https://www.amazon.com/dp/B0HMS3HQVG (paperback), https://www.amazon.com/dp/B0HMS37QX6 (Kindle)
+- [Deutsch B1: German from Zero](https://taprobane-german.github.io/b1.html): Move beyond everyday German: speak, argue and write with confidence at B1. 276 pages. Amazon: https://www.amazon.com/dp/B0HMVK97G6 (paperback), https://www.amazon.com/dp/B0HMVZ28R4 (Kindle)
+- [Deutsch B2: German from Zero](https://taprobane-german.github.io/b2.html): Reach B2: argue, report and write at university and workplace level, with over 600 new words and example sentences. 350 pages. Amazon: https://www.amazon.com/dp/B0HMYH31LN (paperback), https://www.amazon.com/dp/B0HKZPM3NJ (Kindle)
 
 ## German for Nurses & Caregivers (Deutsch Pflege)
 
 > Three-book German course for nurses and caregivers in Germany: B1 ward communication, B2 documentation and difficult conversations, and an Exam Trainer.
 
-- [Deutsch B1 Pflege: Ward Communication & Patient Care](https://kavindukahanda.github.io/taprobane-german/pflege-b1.html): Talk with residents and patients, work in a German team and start preparing for your nursing German exam. 241 pages. Amazon: https://www.amazon.com/dp/B0HPL6C95P (paperback), https://www.amazon.com/dp/B0HPMHCHT3 (Kindle)
-- [Deutsch B2 Pflege: Documentation & Difficult Conversations](https://kavindukahanda.github.io/taprobane-german/pflege-b2.html): The level usually required for professional recognition: write clear, objective care documentation, call a doctor with ISBAR, and handle relatives, dementia and end-of-life care. 232 pages. Amazon: https://www.amazon.com/dp/B0HPZSB2GR (paperback), https://www.amazon.com/dp/B0HPMBTJB7 (Kindle)
-- [Deutsch Exam Trainer: Practice Tests for Nursing German Exams](https://kavindukahanda.github.io/taprobane-german/pflege-b3.html): For when your exam date is close: complete practice tests in the style of the main nursing German exams, FSP-style simulations, time plans, strategies and model answers. Amazon: https://www.amazon.com/dp/B0HQ1FMSQL (paperback), https://www.amazon.com/dp/B0HQ1P11KH (Kindle)
+- [Deutsch B1 Pflege: Ward Communication & Patient Care](https://taprobane-german.github.io/pflege-b1.html): Talk with residents and patients, work in a German team and start preparing for your nursing German exam. 241 pages. Amazon: https://www.amazon.com/dp/B0HPL6C95P (paperback), https://www.amazon.com/dp/B0HPMHCHT3 (Kindle)
+- [Deutsch B2 Pflege: Documentation & Difficult Conversations](https://taprobane-german.github.io/pflege-b2.html): The level usually required for professional recognition: write clear, objective care documentation, call a doctor with ISBAR, and handle relatives, dementia and end-of-life care. 232 pages. Amazon: https://www.amazon.com/dp/B0HPZSB2GR (paperback), https://www.amazon.com/dp/B0HPMBTJB7 (Kindle)
+- [Deutsch Exam Trainer: Practice Tests for Nursing German Exams](https://taprobane-german.github.io/pflege-b3.html): For when your exam date is close: complete practice tests in the style of the main nursing German exams, FSP-style simulations, time plans, strategies and model answers. Amazon: https://www.amazon.com/dp/B0HQ1FMSQL (paperback), https://www.amazon.com/dp/B0HQ1P11KH (Kindle)
 ## Free tools
-- [German level test](https://kavindukahanda.github.io/taprobane-german/level-test.html): 12-question A1–B2 placement test with book recommendation.
-- [Free phrase cards](https://kavindukahanda.github.io/taprobane-german/bonus.html): printable German–English ward phrases for nurses and A1 survival phrases.
+- [German level test](https://taprobane-german.github.io/level-test.html): 12-question A1–B2 placement test with book recommendation.
+- [Free phrase cards](https://taprobane-german.github.io/bonus.html): printable German–English ward phrases for nurses and A1 survival phrases.
 
 ## FAQ
 - Which book should I start with? If you know no German, start with A1. If you can already introduce yourself and handle simple everyday situations, try A2. Each book ends with a final review and mock exam, so you can check whether you are ready for the next level.

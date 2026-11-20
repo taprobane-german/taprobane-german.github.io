@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://kavindukahanda.github.io/taprobane-german/sitemap.xml
+Sitemap: https://taprobane-german.github.io/sitemap.xml
