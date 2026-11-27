@@ -74,6 +74,11 @@ def amz(asin):
     return f"https://www.amazon.com/dp/{asin}"
 
 
+def dims(b):
+    w, h = b.get("cover_size", [562, 900])
+    return f'width="{w}" height="{h}"'
+
+
 def new_tag(b):
     u = b.get("new_until")
     return f' <span class="new-tag" data-until="{u}">New</span>' if u and u >= TODAY else ""
@@ -88,7 +93,7 @@ def card(b):
     c = b["colour"] if b["colour"] != "gold" else ""
     head = f'Book {b["position"]}: {b["short"]}' if b["series"] == "zero" else b["short"]
     return (f'<div class="card bookcard" data-book="{b["id"]}"><a class="cov" href="{b["page"]}">'
-            f'<img src="{b["cover"]}" alt="{esc(b["title"])} — cover" loading="lazy" width="562" height="900"></a>'
+            f'<img src="{b["cover"]}" alt="{esc(b["title"])} — cover" loading="lazy" {dims(b)}></a>'
             f'<div class="body">{pill(b)}<h3><a href="{b["page"]}">{esc(head)}</a></h3><p>{esc(b["blurb"])}</p>' +
             f'<div class="cardbtns">' + (f'<a class="btn sm {c}" data-asin="{b["kindle"]}" data-fmt="kindle" href="{amz(b["kindle"])}">Kindle</a>' if b.get("kindle") else "") +
             f'<a class="btn sm navy" data-asin="{b["paperback"]}" data-fmt="paperback" href="{amz(b["paperback"])}">Paperback</a></div></div></div>')
@@ -106,7 +111,7 @@ def rows(series):
         meta = " · ".join(x for x in [b["level_name"], "CEFR " + b["level"] if "·" not in b["level"] else b["level"],
                                        f'{b["pages"]} pages' if b.get("pages") else ""] if x)
         out.append(f'<div class="brow" id="{b.get("anchor", b["id"])}" data-book="{b["id"]}"><span class="num" aria-hidden="true">0{b["position"]}</span>'
-                   f'<div class="cov"><a href="{b["page"]}"><img src="{b["cover"]}" alt="{esc(b["title"])} — cover" loading="lazy" width="562" height="900"></a></div><div>'
+                   f'<div class="cov"><a href="{b["page"]}"><img src="{b["cover"]}" alt="{esc(b["title"])} — cover" loading="lazy" {dims(b)}></a></div><div>'
                    f'<span class="pill {c}">{esc(meta)}{new_tag(b)}</span><h3><a href="{b["page"]}">{esc(b["title"])}</a></h3><p>{esc(b["description"])}</p>' +
                    (f'<a class="btn {c}" data-asin="{b["kindle"]}" data-fmt="kindle" href="{amz(b["kindle"])}">Kindle eBook</a>' if b.get("kindle") else "") +
                    f'<a class="btn navy" data-asin="{b["paperback"]}" data-fmt="paperback" href="{amz(b["paperback"])}">Paperback</a>'
@@ -130,7 +135,7 @@ def path(b):
     for x in bs:
         here = ' class="here" aria-current="page"' if x is b else ""
         label = f'{x["level"]} {x["level_name"]}' if x["series"] == "zero" else x["short"]
-        parts.append(f'<a href="{x["page"]}"{here}><img src="{x["cover"]}" alt="" width="562" height="900">{esc(label)}</a>')
+        parts.append(f'<a href="{x["page"]}"{here}><img src="{x["cover"]}" alt="" {dims(x)}>{esc(label)}</a>')
     return '<div class="path">' + '<span class="arr" aria-hidden="true">→</span>'.join(parts) + "</div>"
 
 
@@ -296,7 +301,7 @@ def pflege_page(b):
             '<a class="btn" href="bonus.html#pflege">Download free</a></div>')
     eyebrow = f'{b["level_name"]} of 3 · German for Nurses &amp; Caregivers'
     body = f'''<section class="hero teal"><div class="wrap bookhero">
-<div class="cover3d"><img src="{b["cover"]}" alt="{esc(b["title"])} — cover" width="562" height="900"></div>
+<div class="cover3d"><img src="{b["cover"]}" alt="{esc(b["title"])} — cover" {dims(b)}></div>
 <div><span class="eyebrow">{eyebrow}</span><h1>{esc(b["title"])}</h1>
 <p class="lead">{esc(b["description"])}</p>{chips(b)}<!--@buy {b["id"]}--></div></div></section>
 <section class="block"><div class="wrap two">
@@ -322,7 +327,7 @@ def start_page(b):
     other = (f'<div class="band gold" style="margin-top:24px"><div><h2>Also useful: {esc(others[0]["short"])}</h2><p>{esc(others[0]["blurb"])}</p></div>'
              f'<a class="btn navy" href="{others[0]["page"]}">See {esc(others[0]["short"])} →</a></div>') if others else ""
     body = f'''<section class="hero"><div class="wrap bookhero">
-<div class="cover3d"><img src="{b["cover"]}" alt="{esc(b["title"])} — cover" width="562" height="900"></div>
+<div class="cover3d"><img src="{b["cover"]}" alt="{esc(b["title"])} — cover" {dims(b)}></div>
 <div><span class="eyebrow">{esc(SERIES["start"]["name"])} · {esc(b["level_name"])}</span><h1>{esc(b["title"])}</h1>
 <p class="lead"><b>{esc(b["subtitle"])}.</b> {esc(b["description"])}</p>{chips(b)}<!--@buy {b["id"]}--></div></div></section>
 <section class="block"><div class="wrap two">
