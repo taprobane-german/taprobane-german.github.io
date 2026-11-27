@@ -211,3 +211,4 @@ summary:after{content:"+";color:var(--gold);font-size:1.3rem;line-height:1}detai
 .ig-btn:hover{color:#fff;filter:brightness(1.08)}.ig-btn svg{width:19px;height:19px}
 
 .grid.c2{grid-template-columns:repeat(2,minmax(0,300px))}@media(max-width:520px){.grid.c2{grid-template-columns:1fr 1fr;gap:14px}}
+.door.wide{grid-column:1/-1;min-height:260px;grid-template-columns:1fr 260px}.door.start{background:linear-gradient(150deg,rgba(232,196,127,.26),rgba(212,87,59,.14))}.stack.two img{width:150px}.stack.two img:nth-child(1){left:10px;top:24px;transform:rotate(-7deg)}.stack.two img:nth-child(2){left:96px;top:6px;transform:rotate(6deg)}.door:hover .stack.two img:nth-child(2){transform:rotate(11deg) translateX(10px)}@media(max-width:760px){.door.wide{grid-template-columns:1fr}.stack.two img{width:120px}.stack.two img:nth-child(2){left:76px}}
