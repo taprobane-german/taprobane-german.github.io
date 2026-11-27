@@ -8,6 +8,6 @@
     {"book": "a2",        "store": "co.uk", "start": "2026-11-14T08:00Z", "end": "2026-11-21T08:00Z", "kind": "countdown", "text": "<b>Deutsch A2</b> at a reduced price"},
     {"book": "b2",        "store": "co.uk", "start": "2026-11-16T08:00Z", "end": "2026-11-23T08:00Z", "kind": "countdown", "text": "<b>Deutsch B2</b> at a reduced price"},
     {"book": "b1",        "store": "co.uk", "start": "2026-11-21T08:00Z", "end": "2026-11-28T08:00Z", "kind": "countdown", "text": "<b>Deutsch B1</b> at a reduced price"},
-    {"book": "pflege-b1", "store": "*",     "start": "2026-11-27T08:00Z", "end": "2026-11-29T07:59Z", "kind": "free",      "text": "<b>Deutsch B1 Pflege</b> is <b>free on Kindle</b> this weekend"}
+    {"book": "pflege-b1", "store": "*",     "start": "2026-11-27T08:00Z", "end": "2026-11-27T08:00Z", "kind": "free",      "text": "<b>Deutsch B1 Pflege</b> is <b>free on Kindle</b> this weekend"}
   ]
 }

@@ -89,8 +89,8 @@ def card(b):
     head = f'Book {b["position"]}: {b["short"]}' if b["series"] == "zero" else b["short"]
     return (f'<div class="card bookcard" data-book="{b["id"]}"><a class="cov" href="{b["page"]}">'
             f'<img src="{b["cover"]}" alt="{esc(b["title"])} — cover" loading="lazy" width="562" height="900"></a>'
-            f'<div class="body">{pill(b)}<h3><a href="{b["page"]}">{esc(head)}</a></h3><p>{esc(b["blurb"])}</p>'
-            f'<div class="cardbtns"><a class="btn sm {c}" data-asin="{b["kindle"]}" data-fmt="kindle" href="{amz(b["kindle"])}">Kindle</a>'
+            f'<div class="body">{pill(b)}<h3><a href="{b["page"]}">{esc(head)}</a></h3><p>{esc(b["blurb"])}</p>' +
+            f'<div class="cardbtns">' + (f'<a class="btn sm {c}" data-asin="{b["kindle"]}" data-fmt="kindle" href="{amz(b["kindle"])}">Kindle</a>' if b.get("kindle") else "") +
             f'<a class="btn sm navy" data-asin="{b["paperback"]}" data-fmt="paperback" href="{amz(b["paperback"])}">Paperback</a></div></div></div>')
 
 
@@ -107,8 +107,8 @@ def rows(series):
                                        f'{b["pages"]} pages' if b.get("pages") else ""] if x)
         out.append(f'<div class="brow" id="{b.get("anchor", b["id"])}" data-book="{b["id"]}"><span class="num" aria-hidden="true">0{b["position"]}</span>'
                    f'<div class="cov"><a href="{b["page"]}"><img src="{b["cover"]}" alt="{esc(b["title"])} — cover" loading="lazy" width="562" height="900"></a></div><div>'
-                   f'<span class="pill {c}">{esc(meta)}{new_tag(b)}</span><h3><a href="{b["page"]}">{esc(b["title"])}</a></h3><p>{esc(b["description"])}</p>'
-                   f'<a class="btn {c}" data-asin="{b["kindle"]}" data-fmt="kindle" href="{amz(b["kindle"])}">Kindle eBook</a>'
+                   f'<span class="pill {c}">{esc(meta)}{new_tag(b)}</span><h3><a href="{b["page"]}">{esc(b["title"])}</a></h3><p>{esc(b["description"])}</p>' +
+                   (f'<a class="btn {c}" data-asin="{b["kindle"]}" data-fmt="kindle" href="{amz(b["kindle"])}">Kindle eBook</a>' if b.get("kindle") else "") +
                    f'<a class="btn navy" data-asin="{b["paperback"]}" data-fmt="paperback" href="{amz(b["paperback"])}">Paperback</a>'
                    f'<a class="more" href="{b["page"]}">{"All " + str(len(b["units"])) + " units &amp; details" if b.get("units") else "What’s inside"} →</a></div></div>')
     return "".join(out)
@@ -116,9 +116,11 @@ def rows(series):
 
 def buy(b):
     k = " " + b["colour"] if b["colour"] in ("teal", "coral") else ""
-    note = "Opens your own Amazon store — change it in the menu. The Kindle edition is in Kindle Unlimited."
-    return (f'<div class="buybox" data-book="{b["id"]}"><a class="btn{k}" data-asin="{b["kindle"]}" data-fmt="kindle" href="{amz(b["kindle"])}">Kindle eBook</a>'
-            f'<a class="btn ghost" data-asin="{b["paperback"]}" data-fmt="paperback" href="{amz(b["paperback"])}">Paperback</a>'
+    note = "Opens your own Amazon store — change it in the menu." + (" The Kindle edition is in Kindle Unlimited." if b.get("kindle") else "")
+    kb = f'<a class="btn{k}" data-asin="{b["kindle"]}" data-fmt="kindle" href="{amz(b["kindle"])}">Kindle eBook</a>' if b.get("kindle") else ""
+    pc = "btn" if not b.get("kindle") else "btn ghost"
+    return (f'<div class="buybox" data-book="{b["id"]}">{kb}'
+            f'<a class="{pc}" data-asin="{b["paperback"]}" data-fmt="paperback" href="{amz(b["paperback"])}">Paperback</a>'
             f'<small>{note}</small></div>')
 
 
@@ -137,7 +139,7 @@ def chips(b):
     if b.get("pages"): c.append(f'{b["pages"]} pages')
     if b.get("units"): c.append(f'{len(b["units"])} units')
     if b.get("print"): c.append(b["print"])
-    c += ["Paperback & Kindle", "Kindle Unlimited"]
+    c += ["Paperback & Kindle", "Kindle Unlimited"] if b.get("kindle") else ["Paperback"]
     return '<div class="chips">' + "".join(f"<span>{esc(x)}</span>" for x in c) + "</div>"
 
 
@@ -149,14 +151,14 @@ def book_ld(b):
          "publisher": {"@id": BASE + "#publisher"}, "inLanguage": ["en", "de"],
          "educationalLevel": "CEFR " + b["level"].replace("·", "–"), "learningResourceType": "Self-study course book",
          "audience": {"@type": "EducationalAudience", "educationalRole": "student",
-                      "audienceType": "English speakers learning German" if b["series"] == "zero" else "Nurses and caregivers learning German"},
-         "isPartOf": {"@id": BASE + ("#series" if b["series"] == "zero" else "pflege.html#series")},
+                      "audienceType": "Nurses and caregivers learning German" if b["series"] == "pflege" else "English speakers learning German"},
+         "isPartOf": {"@id": series_id(b["series"])},
          "position": b["position"], "description": b["description"],
-         "workExample": [{"@type": "Book", "bookFormat": "https://schema.org/EBook",
-                          "identifier": {"@type": "PropertyValue", "propertyID": "ASIN", "value": b["kindle"]}, "url": amz(b["kindle"])},
-                         {"@type": "Book", "bookFormat": "https://schema.org/Paperback",
+         "workExample": ([{"@type": "Book", "bookFormat": "https://schema.org/EBook",
+                          "identifier": {"@type": "PropertyValue", "propertyID": "ASIN", "value": b["kindle"]}, "url": amz(b["kindle"])}] if b.get("kindle") else []) +
+                         [{"@type": "Book", "bookFormat": "https://schema.org/Paperback",
                           "identifier": {"@type": "PropertyValue", "propertyID": "ASIN", "value": b["paperback"]}, "url": amz(b["paperback"])}],
-         "sameAs": [amz(b["kindle"]), amz(b["paperback"])]}
+         "sameAs": ([amz(b["kindle"])] if b.get("kindle") else []) + [amz(b["paperback"])]}
     if b.get("pages"): d["numberOfPages"] = b["pages"]
     if b.get("released"): d["datePublished"] = b["released"]
     return d
@@ -167,10 +169,13 @@ def org_ld():
             "brand": SITE, "sameAs": [INSTAGRAM, FACEBOOK]}
 
 
+def series_id(key):
+    return BASE + {"zero": "#series", "pflege": "pflege.html#series", "start": "#start-series"}[key]
+
+
 def series_ld(key):
     s = SERIES[key]
-    sid = BASE + ("#series" if key == "zero" else "pflege.html#series")
-    return {"@type": "BookSeries", "@id": sid, "name": s["name"], "url": BASE + ("" if key == "zero" else "pflege.html"),
+    return {"@type": "BookSeries", "@id": series_id(key), "name": s["name"], "url": BASE + {"zero": "", "pflege": "pflege.html", "start": "#start"}[key],
             "publisher": {"@id": BASE + "#publisher"}, "description": s["description"],
             "hasPart": [{"@id": BASE + b["page"] + "#book"} for b in BOOKS if b["series"] == key]}
 
@@ -187,7 +192,7 @@ def jsonld(meta, body):
     if meta.get("book"):
         g = [org_ld(), book_ld(BY_ID[meta["book"]])]
     elif meta.get("ld") == "home":
-        g = [org_ld(), series_ld("zero"), series_ld("pflege")] + [book_ld(b) for b in BOOKS]
+        g = [org_ld(), series_ld("zero"), series_ld("pflege"), series_ld("start")] + [book_ld(b) for b in BOOKS]
     elif meta.get("ld") == "pflege":
         g = [org_ld(), series_ld("pflege")] + [book_ld(b) for b in BOOKS if b["series"] == "pflege"]
     if g is not None:
@@ -213,6 +218,7 @@ def header(active):
 
 def footer():
     zero = "".join(f'<a href="{b["page"]}">{b["level"]} {b["level_name"]}</a>' for b in BOOKS if b["series"] == "zero")
+    zero += "".join(f'<a href="{b["page"]}">{b["short"]}</a>' for b in BOOKS if b["series"] == "start")
     pfl = "".join(f'<a href="{b["page"]}">{b["level_name"]} · {b["short"]}</a>' for b in BOOKS if b["series"] == "pflege")
     return f'''<footer class="site-footer"><div class="wrap"><div class="cols">
 <div>{brand("by " + PUB)}<p>Clear, structured self-study German for English speakers — from your first word to B2, and the German you need on the ward.</p>
@@ -307,24 +313,50 @@ def pflege_page(b):
     return page(b["page"][:-5], meta, body)
 
 
+# ---------- generated Quick-start book pages ----------
+def start_page(b):
+    feats = "".join(f"<li>{esc(f)}</li>" for f in b.get("features", []))
+    others = [x for x in BOOKS if x["series"] == "start" and x is not b]
+    audio = (f'<div class="band gold" style="margin-top:36px"><div><h2>Free audio for this book</h2><p>Listen to 24 lessons — scan the QR code in the book or open the audio page.</p></div>'
+             f'<a class="btn navy" href="{b["audio"]}">Open the free audio →</a></div>') if b.get("audio") else ""
+    other = (f'<div class="band gold" style="margin-top:24px"><div><h2>Also useful: {esc(others[0]["short"])}</h2><p>{esc(others[0]["blurb"])}</p></div>'
+             f'<a class="btn navy" href="{others[0]["page"]}">See {esc(others[0]["short"])} →</a></div>') if others else ""
+    body = f'''<section class="hero"><div class="wrap bookhero">
+<div class="cover3d"><img src="{b["cover"]}" alt="{esc(b["title"])} — cover" width="562" height="900"></div>
+<div><span class="eyebrow">{esc(SERIES["start"]["name"])} · {esc(b["level_name"])}</span><h1>{esc(b["title"])}</h1>
+<p class="lead"><b>{esc(b["subtitle"])}.</b> {esc(b["description"])}</p>{chips(b)}<!--@buy {b["id"]}--></div></div></section>
+<section class="block"><div class="wrap two">
+<div><span class="eyebrow dark">Who it's for</span><h2>Is this your book?</h2><p style="font-size:1.08rem">{esc(b["for"])}</p>
+<a class="btn line" href="level-test.html">Not sure? Take the level test</a></div>
+<div><span class="eyebrow dark">Inside the book</span><h2>What you get</h2><ul class="topics">{feats}</ul></div>
+</div></section>
+<section class="block alt"><div class="wrap"><div class="head"><span class="eyebrow dark">Next step</span><h2>Keep going after this book</h2>
+<p>Ready for more? Continue with the full course: <a href="a1.html">Deutsch A1</a> → <a href="a2.html">A2</a> → <a href="b1.html">B1</a> → <a href="b2.html">B2</a>.</p></div>{audio}{other}</div></section>'''
+    meta = {"title": f'{b["title"]}: {b["subtitle"]} — Self-Study German Book',
+            "description": (f'{b["description"]} ' + ("Paperback and Kindle." if b.get("kindle") else "Paperback."))[:300],
+            "image": "og-books.jpg", "nav": "books", "book": b["id"]}
+    return page(b["page"][:-5], meta, body)
+
+
 # ---------- other generated files ----------
 def deals_js():
     out = []
     for p in PROMOS:
         b = BY_ID[p["book"]]
+        if not b.get("kindle"): continue
         out.append({"s": p["start"], "e": p["end"], "st": p["store"], "asin": b["kindle"], "book": b["id"],
                     "kind": p["kind"], "t": p["text"], "page": b["page"]})
     return "/* GENERATED by _src/build.py from _src/data/promos.json — do not edit */\nwindow.DEALS=" + json.dumps(out, ensure_ascii=False) + ";\n"
 
 
 def llms():
-    lines = [f"# {SITE}", "", f"> Self-study German books for English speakers by {PUB}: {SERIES['zero']['name']} (A1–B2) and {SERIES['pflege']['name']} (B1 Pflege, B2 Pflege, Exam Trainer).", ""]
-    for key in ("zero", "pflege"):
+    lines = [f"# {SITE}", "", f"> Self-study German books for English speakers by {PUB}: {SERIES['zero']['name']} (A1–B2), {SERIES['pflege']['name']} (B1 Pflege, B2 Pflege, Exam Trainer), German in 30 Days and the Der, Die, Das Workbook.", ""]
+    for key in ("zero", "pflege", "start"):
         lines += [f"## {SERIES[key]['name']}", "", f"> {SERIES[key]['description']}", ""]
         for b in BOOKS:
             if b["series"] == key:
                 extra = f' {b["pages"]} pages.' if b.get("pages") else ""
-                lines.append(f'- [{b["title"]}]({BASE}{b["page"]}): {b["description"]}{extra} Amazon: {amz(b["paperback"])} (paperback), {amz(b["kindle"])} (Kindle)')
+                lines.append(f'- [{b["title"]}]({BASE}{b["page"]}): {b["description"]}{extra} Amazon: {amz(b["paperback"])} (paperback)' + (f', {amz(b["kindle"])} (Kindle)' if b.get("kindle") else ""))
         lines.append("")
     extra = SRC / "partials/llms-extra.md"
     return "\n".join(lines) + (extra.read_text(encoding="utf-8") if extra.exists() else "")
@@ -341,8 +373,8 @@ def main():
         (ROOT / f"{f.stem}.html").write_text(page(f.stem, meta, body), encoding="utf-8")
         if not meta["noindex"] and f.stem != "404": built.append(f.stem)
     for b in BOOKS:
-        if b["series"] == "pflege":
-            (ROOT / b["page"]).write_text(pflege_page(b), encoding="utf-8"); built.append(b["page"][:-5])
+        if b["series"] in ("pflege", "start"):
+            (ROOT / b["page"]).write_text((pflege_page if b["series"] == "pflege" else start_page)(b), encoding="utf-8"); built.append(b["page"][:-5])
     (ROOT / "assets/deals.js").write_text(deals_js(), encoding="utf-8")
     (ROOT / "llms.txt").write_text(llms(), encoding="utf-8")
     order = ["index", "pflege"] + [b["page"][:-5] for b in BOOKS]
